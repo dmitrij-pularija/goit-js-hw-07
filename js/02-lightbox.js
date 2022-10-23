@@ -23,30 +23,30 @@ function createGallery() {
 
 createGallery();
 gallery.addEventListener("click", viewImg);
+const lightbox = new SimpleLightbox(".gallery__link", {
+  enableKeyboard: true,
+  docClose: false,
+  captions: true,
+  captionSelector: "img",
+  captionType: "attr",
+  captionsData: "alt",
+  captionPosition: "bottom",
+  captionDelay: 250,
+  close: false,
+});
 
 function viewImg(event) {
   event.preventDefault();
   if (event.target.nodeName !== "IMG") {
     return;
   }
-  var lightbox = new SimpleLightbox(".gallery__link", {
-    enableKeyboard: true,
-    docClose: false,
-    captions: true,
-    captionSelector: "img",
-    captionType: "attr",
-    captionsData: "alt",
-    captionPosition: "bottom",
-    captionDelay: 250,
-    close: false
-  });
-  lightbox.on("show.simplelightbox", () => {
-    document.addEventListener("keydown", esc);
-  });
+  document.addEventListener("keydown", esc);
+  lightbox.on("");
 }
+
 function esc(event) {
+  event.preventDefault();
   if (event.code === "Escape") {
-    event.preventDefault();
     document.removeEventListener("keydown", esc);
   }
 }
